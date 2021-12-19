@@ -7286,6 +7286,7 @@ function requiredInput(param) {
 
         }
 
+        status.updated = Date.now()
         _actions_core__WEBPACK_IMPORTED_MODULE_1___default().setOutput('status', JSON.stringify(status))
 
     } catch (e) {
