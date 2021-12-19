@@ -43,7 +43,7 @@ function requiredInput(param) {
         core.setOutput('status', JSON.stringify(status))
 
     } catch (e) {
-        core.setFailed(error.message)
+        core.setFailed(e.message)
     }
 
 })()
