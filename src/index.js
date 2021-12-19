@@ -30,7 +30,7 @@ function requiredInput(param) {
             for (post of feed.items) {
                 const { title, url } = post
 
-                if (!status.items?.[url]?.twitter) {
+                if (!status.items[url].twitter) {
                     const { data: createdTweet } = await twitterClient.v2.tweet(`New blog post: ${title} ${url}`);
                     status.items = status.items || {}
                     status.items[url] = {...status[url], twitter: true, tweetID: createdTweet.id }
