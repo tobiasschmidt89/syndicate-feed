@@ -7189,89 +7189,41 @@ module.exports = require("util");
 /******/ 	}
 /******/ 	
 /************************************************************************/
-/******/ 	/* webpack/runtime/compat get default export */
-/******/ 	(() => {
-/******/ 		// getDefaultExport function for compatibility with non-harmony modules
-/******/ 		__nccwpck_require__.n = (module) => {
-/******/ 			var getter = module && module.__esModule ?
-/******/ 				() => (module['default']) :
-/******/ 				() => (module);
-/******/ 			__nccwpck_require__.d(getter, { a: getter });
-/******/ 			return getter;
-/******/ 		};
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/define property getters */
-/******/ 	(() => {
-/******/ 		// define getter functions for harmony exports
-/******/ 		__nccwpck_require__.d = (exports, definition) => {
-/******/ 			for(var key in definition) {
-/******/ 				if(__nccwpck_require__.o(definition, key) && !__nccwpck_require__.o(exports, key)) {
-/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
-/******/ 				}
-/******/ 			}
-/******/ 		};
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
-/******/ 	(() => {
-/******/ 		__nccwpck_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/make namespace object */
-/******/ 	(() => {
-/******/ 		// define __esModule on exports
-/******/ 		__nccwpck_require__.r = (exports) => {
-/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
-/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
-/******/ 			}
-/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
-/******/ 		};
-/******/ 	})();
-/******/ 	
 /******/ 	/* webpack/runtime/compat */
 /******/ 	
 /******/ 	if (typeof __nccwpck_require__ !== 'undefined') __nccwpck_require__.ab = __dirname + "/";
 /******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
-// This entry need to be wrapped in an IIFE because it need to be in strict mode.
+// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
-"use strict";
-__nccwpck_require__.r(__webpack_exports__);
-/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_0__ = __nccwpck_require__(7147);
-/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__nccwpck_require__.n(fs__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _actions_core__WEBPACK_IMPORTED_MODULE_1__ = __nccwpck_require__(2186);
-/* harmony import */ var _actions_core__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__nccwpck_require__.n(_actions_core__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var twitter_api_v2__WEBPACK_IMPORTED_MODULE_2__ = __nccwpck_require__(9360);
-/* harmony import */ var twitter_api_v2__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__nccwpck_require__.n(twitter_api_v2__WEBPACK_IMPORTED_MODULE_2__);
-
-
-
+const fs = __nccwpck_require__(7147)
+const core = __nccwpck_require__(2186)
+const { TwitterApi } = __nccwpck_require__(9360)
 
 function requiredInput(param) {
-  if (!_actions_core__WEBPACK_IMPORTED_MODULE_1___default().getInput(param)) throw new Error(`${param} is a required input`)
+  if (!core.getInput(param)) throw new Error(`${param} is a required input`)
 }
 
 ;(async () => {
     try {
-        if (_actions_core__WEBPACK_IMPORTED_MODULE_1___default().getInput('type') !== 'json') throw Error(`${_actions_core__WEBPACK_IMPORTED_MODULE_1___default().getInput('type')} feed type not supported`)
+        if (core.getInput('type') !== 'json') throw Error(`${core.getInput('type')} feed type not supported`)
 
-        const feed = JSON.parse(_actions_core__WEBPACK_IMPORTED_MODULE_1___default().getInput('feed'))
-        const status = JSON.parse(_actions_core__WEBPACK_IMPORTED_MODULE_1___default().getInput('status'))
+        const feed = JSON.parse(core.getInput('feed'))
+        const status = JSON.parse(core.getInput('status'))
 
-        if (_actions_core__WEBPACK_IMPORTED_MODULE_1___default().getInput('targets').split(',').includes('twitter')) {
+        if (core.getInput('targets').split(',').includes('twitter')) {
 
             requiredInput('twitter-consumer-key')
             requiredInput('twitter-consumer-secret')
             requiredInput('twitter-access-token')
             requiredInput('twitter-access-token-secret')
 
-            const twitterClient = new twitter_api_v2__WEBPACK_IMPORTED_MODULE_2__.TwitterApi({
-                appKey: _actions_core__WEBPACK_IMPORTED_MODULE_1___default().getInput('twitter-consumer-key'),
-                appSecret: _actions_core__WEBPACK_IMPORTED_MODULE_1___default().getInput('twitter-consumer-secret'),
-                accessToken: _actions_core__WEBPACK_IMPORTED_MODULE_1___default().getInput('twitter-access-token'),
-                accessSecret: _actions_core__WEBPACK_IMPORTED_MODULE_1___default().getInput('twitter-access-token-secret'),
+            const twitterClient = new TwitterApi({
+                appKey: core.getInput('twitter-consumer-key'),
+                appSecret: core.getInput('twitter-consumer-secret'),
+                accessToken: core.getInput('twitter-access-token'),
+                accessSecret: core.getInput('twitter-access-token-secret'),
             })
 
             for (post of feed.items) {
@@ -7287,10 +7239,10 @@ function requiredInput(param) {
         }
 
         status.updated = Date.now()
-        _actions_core__WEBPACK_IMPORTED_MODULE_1___default().setOutput('status', JSON.stringify(status))
+        core.setOutput('status', JSON.stringify(status))
 
     } catch (e) {
-        _actions_core__WEBPACK_IMPORTED_MODULE_1___default().setFailed(error.message)
+        core.setFailed(error.message)
     }
 
 })()

@@ -1,6 +1,6 @@
-import fs from 'fs'
-import core from '@actions/core'
-import { TwitterApi } from 'twitter-api-v2'
+const fs = require('fs')
+const core = require('@actions/core')
+const { TwitterApi } = require('twitter-api-v2')
 
 function requiredInput(param) {
   if (!core.getInput(param)) throw new Error(`${param} is a required input`)
