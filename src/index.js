@@ -39,6 +39,7 @@ function requiredInput(param) {
 
         }
 
+        status.updated = Date.now()
         core.setOutput('status', JSON.stringify(status))
 
     } catch (e) {
