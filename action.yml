@@ -1,0 +1,27 @@
+name: 'Syndicate Feed'
+description: 'Syndicate feed to social platforms.'
+author: 'Tobias Schmidt'
+inputs:
+  targets:
+    required: true
+    description: An array of target social platforms.
+  type:
+    required: true
+    description: Standard of the used feed.
+  feed:
+    required: true
+    description: Url of the used feed.
+  status:
+    required: true
+    description: Syndication status JSON.
+  twitter-consumer-key:
+    description: Consumer API key.
+  twitter-consumer-secret:
+    description: Consumer API secret key.
+  twitter-access-token:
+    description: Application access token.
+  twitter-access-token-secret:
+    description: Application access token secret.
+runs:
+  using: 'node12'
+  main: 'index.js'
